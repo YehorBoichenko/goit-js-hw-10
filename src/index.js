@@ -27,15 +27,15 @@ const findCountry = event => {
 function countriesData(data) {
   console.log(data);
   if (data.length > 10) {
-    countryList.innerHTML = '';
-    countryInformation.innerHTML = '';
+    clearData(countryList);
+    clearData(countryInformation);
     // console.log(clearData);
     Notiflix.Notify.info(
       'Too many matches found. Please enter a more specific name.'
     );
   } else if (data.length > 1 && data.length <= 10) {
-    countryList.innerHTML = '';
-    countryInformation.innerHTML = '';
+    clearData(countryList);
+    clearData(countryInformation);
     return (countryList.innerHTML = data
       .map(
         item =>
@@ -44,8 +44,8 @@ function countriesData(data) {
       )
       .join(''));
   } else {
-    countryList.innerHTML = '';
-    countryInformation.innerHTML = '';
+    clearData(countryList);
+    clearData(countryInformation);
     return (countryInformation.innerHTML = data
 
       .map(
@@ -63,6 +63,10 @@ function countriesData(data) {
       )
       .join(''));
   }
+}
+
+function clearData(output) {
+  output.innerHTML = '';
 }
 searchInput.addEventListener('input', debounce(findCountry, DEBOUNCE_DELAY));
 searchInput.insertAdjacentHTML('beforebegin', '<h1>Country Finder</h1>');
